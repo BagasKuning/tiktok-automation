@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    />
+    <title>TikTok Automation: Login, Scroll, Like</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <div class="main-container">
+      <h1>Tiktok Automation</h1>
+      <p>
+        Please enter your TikTok account, specify how many times you want to
+        scroll and how many videos to like automatically. Click start and just
+        wait (use manual interaction if it requires captcha or OTP code).
+      </p>
+
+      <form id="login-form">
+        <div class="input-div">
+          <label for="email">Email:</label>
+          <input type="email" id="email" required /><br />
+        </div>
+
+        <div class="input-div">
+          <label for="password">Password:</label>
+          <input type="password" id="password" required /><br />
+        </div>
+
+        <div class="input-number-container">
+          <div class="input-number-div">
+            <label for="manyScroll">Number of scrolls:</label>
+            <input
+              type="number"
+              id="manyScroll"
+              name="manyScroll"
+              min="1"
+              max="99999"
+              required
+            />
+          </div>
+
+          <div class="input-number-div">
+            <label for="manyLike">Number of videos liked:</label>
+            <input
+              type="number"
+              id="manyLike"
+              name="manyLike"
+              min="0"
+              max="99999"
+            />
+          </div>
+        </div>
+
+        <button type="submit">Start</button>
+      </form>
+    </div>
+
+    <script src="./js/renderer.js"></script>
+  </body>
+</html>

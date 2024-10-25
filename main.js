@@ -67,7 +67,7 @@ ipcMain.on("start-automation", async (event, data) => {
     });
     console.log("Login successful");
 
-    let scrollDelay = 5; // suggestion min set 5s to next video
+    let scrollDelay = 5; // recommended min set 5s to next video
     let i = 0; //  This index is important to catch a element and for statement
     while (i < manyScroll) {
       await autoLike(page, i, manyLike);

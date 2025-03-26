@@ -26,6 +26,7 @@ const createWindow = async () => {
 };
 
 app.on('ready', () => {
+  console.log(`test update v1.5`);
   console.log(`Current version: ${app.getVersion()}`);
   autoUpdater.checkForUpdatesAndNotify()
   createWindow();

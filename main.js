@@ -29,6 +29,8 @@ app.whenReady().then(() => {
   autoUpdater.checkForUpdatesAndNotify()
   createWindow();
 
+  console.log('add version, test update')
+
   /* open window if none are open (in macOS),
   because macOS apps generally continue running even without any windows open, not like Linux or Windows OS*/
   app.on("activate", () => {

@@ -1,13 +1,12 @@
-// 'app' manages the application life cycle, 'BrowserWindow' creates application windows
 const { app, BrowserWindow, ipcMain } = require("electron");
-
-// menage paths
+const { autoUpdater } = require('electron-updater')
 const path = require("node:path");
 const puppeteer = require("puppeteer-extra");
 
+require('dotenv').config();
+
 const { autoScroll, autoLike } = require("./src/js/utils");
 
-//plugin to avoid bot detection
 const StealthPlugin = require("puppeteer-extra-plugin-stealth");
 puppeteer.use(StealthPlugin());
 
@@ -27,6 +26,7 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
+  autoUpdater.checkForUpdatesAndNotify()
   createWindow();
 
   /* open window if none are open (in macOS),
@@ -35,6 +35,30 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
+
+// Event listener autoUpdater
+autoUpdater.on('update-available', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Tersedia',
+    message: 'Versi baru tersedia. Aplikasi akan diupdate secara otomatis.',
+  });
+});
+
+autoUpdater.on('update-downloaded', () => {
+  dialog.showMessageBox({
+    type: 'info',
+    title: 'Update Siap',
+    message: 'Update telah didownload, aplikasi akan restart untuk menerapkan update.',
+  }).then(() => {
+    autoUpdater.quitAndInstall();
+  });
+});
+
+autoUpdater.on('error', (error) => {
+  dialog.showErrorBox('Update Error', error == null ? "unknown" : (error.stack || error).toString());
+});
+
 
 // Quit when all windows are closed, except on macOS.
 app.on("window-all-closed", () => {

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { autoUpdater } = require('electron-updater')
 const path = require("node:path");
 const puppeteer = require("puppeteer-extra");
@@ -25,7 +25,7 @@ const createWindow = async () => {
   win.loadFile(path.join(__dirname, "src", "index.html"));
 };
 
-app.whenReady().then(() => {
+app.on('ready', () => {
   console.log(`Current version: ${app.getVersion()}`);
   autoUpdater.checkForUpdatesAndNotify()
   createWindow();
@@ -40,26 +40,46 @@ app.whenReady().then(() => {
 });
 
 // Event listener autoUpdater
-autoUpdater.on('update-available', () => {
+autoUpdater.on("update-available", () => {
   dialog.showMessageBox({
-    type: 'info',
-    title: 'Update Tersedia',
-    message: 'Versi baru tersedia. Aplikasi akan diupdate secara otomatis.',
+    type: "info",
+    title: "Update Tersedia",
+    message: "Versi baru tersedia. Aplikasi akan diupdate secara otomatis.",
+  });
+
+  // Kirim info ke renderer
+  BrowserWindow.getAllWindows().forEach(win => {
+    win.webContents.send("update-available");
   });
 });
 
-autoUpdater.on('update-downloaded', () => {
+autoUpdater.on("update-not-available", () => {
+  console.log("Tidak ada update terbaru.");
+});
+
+
+autoUpdater.on("update-downloaded", () => {
   dialog.showMessageBox({
-    type: 'info',
-    title: 'Update Siap',
-    message: 'Update telah didownload, aplikasi akan restart untuk menerapkan update.',
+    type: "info",
+    title: "Update Siap",
+    message: "Update telah didownload, aplikasi akan restart untuk menerapkan update.",
   }).then(() => {
     autoUpdater.quitAndInstall();
   });
+
+  // Kirim info ke renderer
+  BrowserWindow.getAllWindows().forEach(win => {
+    win.webContents.send("update-downloaded");
+  });
 });
 
-autoUpdater.on('error', (error) => {
-  dialog.showErrorBox('Update Error', error == null ? "unknown" : (error.stack || error).toString());
+autoUpdater.on("error", (error) => {
+  dialog.showErrorBox("Update Error", error?.stack || error.toString());
+
+  // Kirim error ke renderer
+  BrowserWindow.getAllWindows().forEach(win => {
+    win.webContents.send("update-error", error?.message || "Terjadi kesalahan saat update.");
+  });
 });
 
 

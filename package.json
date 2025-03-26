@@ -1,10 +1,11 @@
 {
   "name": "automation-bot",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "Electron & Puppeteer",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "publish": "cross-env GITHUB_TOKEN=$GITHUB_TOKEN electron-builder --publish always",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
@@ -33,6 +34,7 @@
     "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "electron": "^33.0.2",
     "electron-builder": "^25.1.8",
     "electron-updater": "^6.3.9"

@@ -9,3 +9,5 @@ document.getElementById("login-form").addEventListener("submit", (event) => {
   // send data to main file
   window.myApi.send("start-automation", { email, password, manyScroll, manyLike });
 });
+
+

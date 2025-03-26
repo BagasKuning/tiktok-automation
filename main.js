@@ -26,6 +26,7 @@ const createWindow = async () => {
 };
 
 app.whenReady().then(() => {
+  console.log(`Current version: ${app.getVersion()}`);
   autoUpdater.checkForUpdatesAndNotify()
   createWindow();
 

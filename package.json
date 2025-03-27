@@ -1,6 +1,6 @@
 {
   "name": "automation-bot",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Electron & Puppeteer",
   "main": "main.js",
   "scripts": {
@@ -36,7 +36,6 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "electron": "^33.0.2",
-    "electron-builder": "^25.1.8",
-    "electron-updater": "^6.3.9"
+    "electron-builder": "^25.1.8"
   }
 }

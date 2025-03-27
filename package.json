@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "publish": "GITHUB_TOKEN=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 electron-builder --publish always",
+    "publish": "GITHUB_TOKEN= electron-builder --publish always",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {

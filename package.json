@@ -1,6 +1,6 @@
 {
   "name": "automation-bot",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "description": "Electron & Puppeteer",
   "main": "main.js",
   "scripts": {
@@ -9,15 +9,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
-    "win": {
-      "target": "nsis"
-    },
-    "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ]
-    },
     "publish": {
       "provider": "github",
       "owner": "BagasKuning",

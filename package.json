@@ -1,6 +1,6 @@
 {
   "name": "automation-bot",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "Electron & Puppeteer",
   "main": "main.js",
   "scripts": {
